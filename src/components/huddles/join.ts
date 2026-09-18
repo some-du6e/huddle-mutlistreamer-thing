@@ -1,9 +1,8 @@
-import type { Account } from "../../types";
+import type { Account, JoinChannelHuddleResponse } from "../../types";
 
-type JoinChannelHuddleResponse = {
-    ok: boolean;
+type JoinChannelHuddleApiResponse = JoinChannelHuddleResponse | {
+    ok: false;
     error?: string;
-    [key: string]: unknown;
 };
 
 export async function joinChannelHuddle(
@@ -27,7 +26,7 @@ export async function joinChannelHuddle(
         throw new Error(`Slack rooms.join returned HTTP ${response.status}`);
     }
 
-    const result = await response.json() as JoinChannelHuddleResponse;
+    const result = await response.json() as JoinChannelHuddleApiResponse;
     if (!result.ok) {
         throw new Error(`Slack rooms.join failed: ${result.error ?? "unknown error"}`);
     }
