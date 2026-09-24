@@ -1,6 +1,7 @@
 export type Account = {
     xoxcToken: string;
     xoxdToken: string;
+    userId: string;
 };
 
 export type CachetUserResult = {
@@ -11,6 +12,16 @@ export type CachetUserResult = {
   "pronouns": string,
   "imageUrl": string
 }
+
+export type SlackAuthTestResponse = {
+  "ok": boolean,
+  "url": string,
+  "team": string,
+  "user": string,
+  "team_id": string,
+  "user_id": string
+}
+
 
 export type PreparePhotoResponse = {
   "ok": boolean,

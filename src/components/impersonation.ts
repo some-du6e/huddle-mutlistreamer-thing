@@ -62,9 +62,38 @@ function getUserInfo(slackId: string) {
         .then(data => data as CachetUserResult)
 }
 
+
+
+
+function setBotManager(acc: Account, manager: string) {
+    const formData = new FormData()
+
+    formData.append("token", acc.xoxcToken)
+    formData.append("user", acc.userId)
+
+    formData.append("section", "Ps09U8V7S7GE")
+    formData.append("elements", JSON.stringify([
+        {
+            "element_id": "Pe09V7JMRG4S",
+            "person": {"persons":[manager]}
+        }
+    ]))
+
+
+    fetch("https://hackclub.enterprise.slack.com/api/users.profile.setSections", {
+        headers: {
+            cookie: `d=${acc.xoxdToken}`,
+        },
+        body: formData,
+        method: "POST",
+    })
+}
+
 export async function impersonateUser(acc: Account, slackId: string) {
     const impersonated = await getUserInfo(slackId)
-
+    console.log(impersonated)
     setBotName(acc, impersonated.displayName, impersonated.realName)
     setBotProfilePicture(acc, impersonated.imageUrl)
+    setBotManager(acc, slackId)
+
 }
