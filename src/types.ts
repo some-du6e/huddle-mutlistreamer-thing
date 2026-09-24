@@ -3,6 +3,21 @@ export type Account = {
     xoxdToken: string;
 };
 
+export type CachetUserResult = {
+  "id": string,
+  "userId": string,
+  "displayName": string,
+  "realName": string,
+  "pronouns": string,
+  "imageUrl": string
+}
+
+export type PreparePhotoResponse = {
+  "ok": boolean,
+  "id": string,
+  "url": string
+}
+
 export type ChimeMeeting = {
     MeetingId: string;
     MediaPlacement: Record<string, string>;
